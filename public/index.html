@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Simulado INSS · Prof.ª Adriane Fauth</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#031636">
+<link rel="icon" href="https://adrianefauth.com.br/wp-content/uploads/2024/06/cropped-Logo-Adriane-Fauth-02-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Literata:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body class="pg-auth">
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="stars" aria-hidden="true"></div>
+
+<main class="auth">
+  <section class="auth-hero">
+    <img class="logo" src="https://adrianefauth.com.br/wp-content/uploads/2024/06/Logo-Adriane-Fauth-04.png" alt="Adriane Fauth">
+    <span class="kicker"><span class="dot"></span>Técnico do Seguro Social · padrão Cebraspe</span>
+    <h1>Simulado <span class="ouro">INSS</span><br><em>do jeito que cai na prova.</em></h1>
+    <p class="lead">80 itens inéditos de certo ou errado, cronômetro de 3 horas e correção na hora com gabarito comentado, mapa dos seus pontos fortes e ranking entre os alunos.</p>
+    <ul class="chips">
+      <li><b>70</b> Previdenciário</li>
+      <li><b>10</b> Constitucional</li>
+      <li><b>3h</b> de prova</li>
+      <li><b>1</b> tentativa a cada 24h</li>
+    </ul>
+  </section>
+
+  <section class="auth-card">
+    <div class="tabs" role="tablist">
+      <button class="tab on" data-tab="entrar" role="tab">Entrar</button>
+      <button class="tab" data-tab="criar" role="tab">Criar conta</button>
+      <span class="tab-ink" aria-hidden="true"></span>
+    </div>
+
+    <form id="f-entrar" class="form on" novalidate>
+      <label>CPF<input name="cpf" inputmode="numeric" autocomplete="username" placeholder="000.000.000-00"><span class="dica-campo"></span></label>
+      <label>Senha<input name="senha" type="password" autocomplete="current-password" placeholder="Sua senha"></label>
+      <button class="btn btn-ouro w100" type="submit">Entrar no simulado</button>
+    </form>
+
+    <form id="f-criar" class="form" novalidate>
+      <label>Nome completo<input name="nome" autocomplete="name" placeholder="Como no seu documento"></label>
+      <label>CPF<input name="cpf" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00"><span class="dica-campo"></span></label>
+      <div class="row2">
+        <label>E-mail<input name="email" type="email" autocomplete="email" placeholder="voce@email.com"></label>
+        <label>WhatsApp<input name="whatsapp" inputmode="tel" autocomplete="tel" placeholder="(45) 99999-9999"></label>
+      </div>
+      <label>Crie uma senha<input name="senha" type="password" autocomplete="new-password" placeholder="Mínimo de 6 caracteres"></label>
+      <label class="check"><input type="checkbox" name="lgpd" value="1"> Concordo com o uso dos meus dados para o simulado, o ranking (apenas primeiro nome e inicial) e comunicações da Prof.ª Adriane Fauth, conforme a LGPD.</label>
+      <button class="btn btn-ouro w100" type="submit">Criar conta e começar</button>
+    </form>
+
+    <p class="fine">Seu CPF fica vinculado às suas tentativas. Esqueceu a senha? Fale com a equipe pelo WhatsApp.</p>
+  </section>
+</main>
+
+<script src="/ui.js"></script>
+<script src="/auth.js"></script>
+</body>
+</html>

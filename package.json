@@ -1,0 +1,18 @@
+{
+  "name": "simulado-inss-fauth",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Simulado INSS (padrão Cebraspe) da Prof.ª Adriane Fauth: login por CPF, 1 tentativa a cada 24h, 3h de prova, anti-cola, gamificação e ranking.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  }
+}
