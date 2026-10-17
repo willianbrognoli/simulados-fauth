@@ -195,7 +195,7 @@ function mostrar(i) {
   card.classList.remove('anima'); void card.offsetWidth; card.classList.add('anima');
   $('#q-num').textContent = `Item ${q.n} de ${P.questoes.length}`;
   $('#q-mat').textContent = q.materia;
-  $('#q-txt').textContent = q.texto;
+  $('#q-txt').innerHTML = fmt(q.texto);
   $('#prev').disabled = idx === 0;
   $('#next').textContent = idx === P.questoes.length - 1 ? 'Revisar e entregar' : 'Próximo →';
   estado();

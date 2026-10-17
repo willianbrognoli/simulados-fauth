@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Literata:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<script src="/tema.js"></script>
 <link rel="stylesheet" href="/app.css">
 </head>
 <body class="pg-app pg-res">
@@ -23,11 +24,9 @@
 </header>
 
 <section class="hero-p">
-  <div class="aurora abs" aria-hidden="true"><i></i><i></i><i></i></div>
-  <div class="stars abs" aria-hidden="true"></div>
   <div class="wrap hero-grid">
     <div>
-      <span class="kicker"><span class="dot"></span><span id="r-data">Resultado do simulado</span></span>
+      <span class="kicker"><span id="r-data">Resultado do simulado</span></span>
       <h1 id="r-tit">Calculando seu <em>resultado…</em></h1>
       <p class="sub" id="r-sub"></p>
       <div class="res-stats" id="r-stats"></div>
@@ -41,24 +40,24 @@
 </section>
 
 <main class="wrap">
-  <section class="sec grid2" style="margin-top:-80px;position:relative;z-index:2">
+  <section class="sec grid2">
     <div class="card rv">
-      <h2><svg viewBox="0 0 100 100"><path d="M50 0 L56 44 L100 50 L56 56 L50 100 L44 56 L0 50 L44 44 Z"/></svg>Desempenho por tema</h2>
+      <h2>Desempenho por tema</h2>
       <p class="sub">As setas comparam com o seu simulado anterior.</p>
       <div id="temas"></div>
     </div>
     <div class="card rv">
-      <h2><svg viewBox="0 0 100 100"><path d="M50 0 L56 44 L100 50 L56 56 L50 100 L44 56 L0 50 L44 44 Z"/></svg>Seu plano de estudo</h2>
+      <h2>Seu plano de estudo</h2>
       <p class="sub">Comece pelos temas em vermelho: é onde estão os pontos mais fáceis de ganhar.</p>
-      <p class="foco-tit">✅ Onde você foi bem</p>
+      <p class="foco-tit">Onde você foi bem</p>
       <ul class="foco bem" id="bem"></ul>
-      <p class="foco-tit">🎯 O que estudar agora</p>
+      <p class="foco-tit">O que estudar agora</p>
       <ul class="foco mal" id="mal"></ul>
     </div>
   </section>
 
   <section class="sec">
-    <h2><svg viewBox="0 0 100 100"><path d="M50 0 L56 44 L100 50 L56 56 L50 100 L44 56 L0 50 L44 44 Z"/></svg>Gabarito comentado</h2>
+    <h2>Gabarito comentado</h2>
     <p class="sub">Entenda cada item. É aqui que a nota sobe de verdade.</p>
     <div class="filtros" id="filtros">
       <button class="on" data-f="todos">Todos</button>

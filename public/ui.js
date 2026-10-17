@@ -19,6 +19,8 @@ async function api(url, opts = {}) {
 }
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+// texto de item: escapa e transforma __trecho__ em destaque (sublinhado + negrito), como o grifo da prova impressa
+const fmt = s => esc(s).replace(/__(.+?)__/g, '<u class="dest">$1</u>');
 const pad = n => String(n).padStart(2, '0');
 
 let _toastT;
@@ -155,3 +157,36 @@ function confete(ms = 2600) {
     if (t - ini < ms) requestAnimationFrame(quadro); else cv.remove();
   })(ini);
 }
+
+// botão claro/escuro no topo de cada tela (no login, no canto do cartão)
+(function () {
+  const cabs = $$('.top .in, .pbar .in, .auth-card');
+  if (!cabs.length) return;
+  const SOL = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>';
+  const LUA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>';
+  const botoes = [];
+  const pintar = () => {
+    const escuro = document.documentElement.dataset.tema === 'escuro';
+    for (const b of botoes) {
+      b.innerHTML = escuro ? SOL : LUA;
+      b.title = b.ariaLabel = escuro ? 'Mudar para modo claro' : 'Mudar para modo escuro';
+    }
+  };
+  const trocar = () => {
+    const escuro = document.documentElement.dataset.tema !== 'escuro';
+    if (escuro) document.documentElement.dataset.tema = 'escuro'; else delete document.documentElement.dataset.tema;
+    try { localStorage.setItem('tema', escuro ? 'escuro' : 'claro'); } catch (e) {}
+    pintar();
+  };
+  for (const cab of cabs) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'tema-btn';
+    b.addEventListener('click', trocar);
+    // no topo, entra antes do botão Sair / Entregar / Meu painel
+    const ultimo = cab.matches('.auth-card') ? null : cab.lastElementChild;
+    cab.insertBefore(b, ultimo);
+    botoes.push(b);
+  }
+  pintar();
+})();

@@ -2,7 +2,6 @@
 const qs = new URLSearchParams(location.search);
 let R, filtro = 'todos';
 
-estrelas($('.hero-p .stars'), 18);
 ['copy', 'cut', 'contextmenu', 'selectstart', 'dragstart'].forEach(ev => document.addEventListener(ev, e => e.preventDefault()));
 document.addEventListener('keydown', e => {
   const k = (e.key || '').toLowerCase();
@@ -63,9 +62,9 @@ function revisao() {
     const selo = s === 'acerto' ? '<span class="pill ok">✓ Você acertou</span>' : s === 'erro' ? '<span class="pill no">✗ Você errou (−1)</span>' : '<span class="pill">Em branco</span>';
     return `<article class="rev ${s}">
       <div class="gb"><b>Item ${q.n}</b><span class="tag azul">${esc(q.tema)}</span>${selo}</div>
-      <p class="qtxt">${esc(q.texto)}</p>
+      <p class="qtxt">${fmt(q.texto)}</p>
       <div class="gb"><span class="pill">Sua resposta: ${q.resposta ? txt[q.resposta] : '—'}</span><span class="pill ok">Gabarito: ${txt[q.gabarito]}</span></div>
-      <div class="coment"><b>Comentário:</b> ${esc(q.comentario)}</div>
+      <div class="coment"><b>Comentário:</b> ${fmt(q.comentario)}</div>
     </article>`;
   }).join('') : '<p class="vazio">Nenhum item nesta categoria. 👏</p>';
 }

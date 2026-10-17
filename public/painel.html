@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Literata:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<script src="/tema.js"></script>
 <link rel="stylesheet" href="/app.css">
 </head>
 <body class="pg-app">
@@ -24,11 +25,9 @@
 </header>
 
 <section class="hero-p">
-  <div class="aurora abs" aria-hidden="true"><i></i><i></i><i></i></div>
-  <div class="stars abs" aria-hidden="true"></div>
   <div class="wrap hero-grid">
     <div>
-      <span class="kicker"><span class="dot"></span>Simulado INSS · Técnico do Seguro Social</span>
+      <span class="kicker">Simulado INSS · Técnico do Seguro Social</span>
       <h1 id="titulo">Pronto para a <em>prova de hoje?</em></h1>
       <p class="sub" id="subtitulo">80 itens de certo ou errado em 3 horas. Cada erro anula um acerto, então em dúvida, deixe em branco.</p>
       <div class="nivel">
@@ -46,36 +45,36 @@
 
 <main class="wrap">
   <div class="kpis">
-    <div class="card kpi rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><b id="k-ult">—</b><span>Última nota líquida</span></div>
-    <div class="card kpi dest rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div><b id="k-mel">—</b><span>Melhor nota</span></div>
-    <div class="card kpi rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></div><b id="k-pos">—</b><span id="k-pos-sub">no ranking</span></div>
-    <div class="card kpi rv"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><b id="k-qtd">0</b><span>Simulados feitos</span></div>
+    <div class="card kpi rv"><b id="k-ult">—</b><span>Última nota líquida</span></div>
+    <div class="card kpi rv"><b id="k-mel">—</b><span>Melhor nota</span></div>
+    <div class="card kpi rv"><b id="k-pos">—</b><span id="k-pos-sub">no ranking</span></div>
+    <div class="card kpi rv"><b id="k-qtd">0</b><span>Simulados feitos</span></div>
   </div>
 
   <section class="sec grid2">
     <div class="card rv">
-      <h2><svg viewBox="0 0 100 100"><path d="M50 0 L56 44 L100 50 L56 56 L50 100 L44 56 L0 50 L44 44 Z"/></svg>Seu desempenho por tema</h2>
+      <h2>Seu desempenho por tema</h2>
       <p class="sub">Baseado no seu último simulado. As setas comparam com a tentativa anterior.</p>
       <div id="temas"><p class="vazio">Faça o primeiro simulado para ver seu mapa de desempenho.</p></div>
     </div>
     <div class="card rv">
-      <h2><svg viewBox="0 0 100 100"><path d="M50 0 L56 44 L100 50 L56 56 L50 100 L44 56 L0 50 L44 44 Z"/></svg>Seu plano de estudo</h2>
+      <h2>Seu plano de estudo</h2>
       <p class="sub">Onde você está indo bem e o que priorizar até a próxima tentativa.</p>
-      <p class="foco-tit">✅ Onde você está indo bem</p>
+      <p class="foco-tit">Onde você está indo bem</p>
       <ul class="foco bem" id="bem"><li><div><b>Sem dados ainda</b><span>Seus pontos fortes aparecem aqui depois do 1º simulado.</span></div></li></ul>
-      <p class="foco-tit">🎯 O que estudar agora</p>
+      <p class="foco-tit">O que estudar agora</p>
       <ul class="foco mal" id="mal"><li><div><b>Sem dados ainda</b><span>Os temas que mais precisam de atenção aparecem aqui.</span></div></li></ul>
     </div>
   </section>
 
   <section class="sec grid2">
     <div class="card rv">
-      <h2><svg viewBox="0 0 100 100"><path d="M50 0 L56 44 L100 50 L56 56 L50 100 L44 56 L0 50 L44 44 Z"/></svg>Sua evolução</h2>
+      <h2>Sua evolução</h2>
       <p class="sub">Nota líquida (certos − errados) em cada simulado.</p>
       <div class="chart" id="chart"><p class="vazio">Seu gráfico de evolução aparece a partir do 1º simulado.</p></div>
     </div>
     <div class="card rv">
-      <h2><svg viewBox="0 0 100 100"><path d="M50 0 L56 44 L100 50 L56 56 L50 100 L44 56 L0 50 L44 44 Z"/></svg>Conquistas</h2>
+      <h2>Conquistas</h2>
       <p class="sub" id="bdg-sub">Desbloqueie medalhas conforme evolui.</p>
       <div class="badges" id="badges"></div>
     </div>
@@ -83,13 +82,13 @@
 
   <section class="sec grid2">
     <div class="card rv">
-      <h2><svg viewBox="0 0 100 100"><path d="M50 0 L56 44 L100 50 L56 56 L50 100 L44 56 L0 50 L44 44 Z"/></svg>Ranking geral</h2>
+      <h2>Ranking geral</h2>
       <p class="sub">O ranking oficial considera a 1ª tentativa de cada aluno. Empate: vence quem terminou mais rápido.</p>
       <div class="rank-tg"><button class="on" data-modo="primeira">1ª tentativa</button><button data-modo="melhor">Melhor nota</button></div>
       <div class="tabela"><table class="rank" id="rank"><thead><tr><th>#</th><th>Aluno</th><th>Nota</th><th>Certos</th><th>Tempo</th></tr></thead><tbody></tbody></table></div>
     </div>
     <div class="card rv">
-      <h2><svg viewBox="0 0 100 100"><path d="M50 0 L56 44 L100 50 L56 56 L50 100 L44 56 L0 50 L44 44 Z"/></svg>Histórico</h2>
+      <h2>Histórico</h2>
       <p class="sub">Toque num simulado para ver o gabarito comentado.</p>
       <div class="hist" id="hist"><p class="vazio">Nenhum simulado concluído ainda.</p></div>
     </div>

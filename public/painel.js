@@ -1,8 +1,6 @@
 'use strict';
 let ME, HIST = [], TEMAS = {}, modoRank = 'primeira', cdTimer;
 
-estrelas($('.hero-p .stars'), 18);
-
 $('#sair').addEventListener('click', async () => {
   await api('/api/logout', { method: 'POST', semRedirect: true }).catch(() => {});
   location.href = '/';
