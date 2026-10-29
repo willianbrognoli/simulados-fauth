@@ -73,3 +73,25 @@ No iPhone o navegador não permite tela cheia em páginas; nele a vigilância co
 Edite `questoes.js`. Cada item tem `id` único, `tema` (precisa existir em `TEMAS`), `gabarito` (`'C'` ou `'E'`),
 `texto` e `comentario`. Itens de Direito Constitucional aparecem primeiro na prova, depois os de Previdenciário,
 com ordem sorteada dentro de cada bloco a cada tentativa. Depois de editar, faça commit e o Easypanel publica de novo.
+
+
+## Atualização de 29/10/2026: Simulados 1 e 2 + login pelo Firebase
+
+- **Dois simulados** (`simulados.js`), cada um com 40 itens: metade do arquivo de Constitucional
+  (bloco 1, sempre primeiro) e metade do Previdenciário (bloco 2). Simulado 1 = CF 1-5 + PREV 1-35;
+  Simulado 2 = CF 6-10 + PREV 36-70. Os 80 itens dos arquivos da professora estão em uso.
+  Duração 1h30 cada (2:15 por item). Correções de 29/10 com base na legislação: PREV 8, 23, 31, 32,
+  49, 63, 64, 70. PREV 63 marcado para revisão da professora (`revisar: true`).
+- **Regras por simulado:** 1 tentativa a cada 24 h por simulado (o aluno pode fazer os dois no mesmo
+  dia), uma prova aberta por vez, ranking e histórico separados. O simulado antigo de 80 itens
+  (`questoes.js`, tentativas com `simulado = 'inss80'`) saiu da tela e ficou guardado no banco.
+- **Retorno por faixa de acertos** no resultado (avançado ≥ 90%, intermediário ≥ 70%, básico ≥ 50%,
+  iniciante abaixo).
+- **Login pelo Firebase Authentication** (projeto `simulados-fauth`, provedor E-mail/senha), chamado
+  pelo servidor pela API REST (o navegador não carrega SDK externo). O aluno entra com **CPF + senha**:
+  o servidor acha o e-mail do CPF e o Firebase confere a senha. O cadastro cria a conta no Firebase e
+  envia e-mail de confirmação; "Esqueci minha senha" envia o link de redefinição.
+  Contas antigas (senha no nosso banco) migram sozinhas para o Firebase no primeiro login.
+- **Env novas (opcionais):** `FIREBASE_API_KEY` (padrão: chave pública do app `simulados-web`) e
+  `SITE_URL` (padrão `https://simulados.adrianefauth.com.br`, usado nos links dos e-mails).
+- Banco: colunas novas `alunos.firebase_uid` e `tentativas.simulado` (criadas sozinhas ao subir).

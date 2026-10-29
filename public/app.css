@@ -382,3 +382,92 @@ canvas.confete{position:fixed;inset:0;pointer-events:none;z-index:500}
 .grid2 > *{min-width:0}
 /* celular: os dois botões de resposta cabem lado a lado */
 @media(max-width:900px){.resps{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-top:22px}.resp{padding:.9em .5em;letter-spacing:.04em;gap:8px}}
+
+/* ===== 29/10/2026: dois simulados (cartões, seletor), esqueci a senha, faixa de desempenho ===== */
+.link-senha{background:none;border:0;color:var(--azul-txt);font-weight:700;font-size:.82rem;cursor:pointer;padding:4px;align-self:center;text-decoration:underline;text-underline-offset:3px}
+.link-senha:hover{color:var(--txt)}
+
+.sims{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:26px}
+.sim{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:var(--r);padding:22px 22px 20px;display:flex;flex-direction:column;gap:12px;cursor:pointer;transition:border-color .25s,background .25s,transform .25s}
+.sim:hover{background:rgba(255,255,255,.09);transform:translateY(-2px)}
+.sim.sel{border-color:var(--ouro);background:rgba(229,185,92,.08);box-shadow:0 0 0 1px var(--ouro) inset}
+.sim header{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.sim-n{font-size:1.45rem;font-weight:800;letter-spacing:-.01em;color:#fff}
+.sim-info{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0}
+.sim-info li{font-size:.8rem;color:#c9d6f2;background:rgba(255,255,255,.07);border-radius:99px;padding:.35em .8em}
+.sim-info b{color:var(--ouro2);font-weight:800}
+.sim-nota{color:#c9d6f2;font-size:.9rem;margin:0}
+.sim-nota b{color:#fff;font-size:1.05rem}
+.sim-acao{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:auto}
+.sim-acao small{color:#c9d6f2;font-size:.78rem}
+.tag.ouro{background:rgba(229,185,92,.18);color:var(--ouro2)}
+.contador.mini{margin-top:0;gap:6px}
+.contador.mini div{min-width:50px;padding:.35em .5em;border-radius:10px}
+.contador.mini b{font-size:1.15rem}
+.contador.mini span{font-size:.55rem}
+
+.sim-tg{display:flex;gap:6px;background:var(--card);border:1px solid var(--linha);border-radius:99px;padding:5px;margin:26px auto 0;width:max-content;max-width:100%;box-shadow:var(--sh);position:sticky;top:10px;z-index:5}
+.sim-tg button{padding:.6em 1.4em;border-radius:99px;font-weight:800;font-size:.88rem;color:var(--mut);transition:.2s}
+.sim-tg button.on{background:var(--navy);color:#fff}
+:root[data-tema="escuro"] .sim-tg button.on{background:var(--sel)}
+
+.faixa{display:flex;gap:14px;align-items:flex-start;border-radius:var(--r);padding:18px 20px;margin-top:20px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);color:#e7edf8;max-width:640px}
+.faixa b{display:block;color:var(--ouro2);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px}
+.faixa p{margin:0;font-size:.92rem;line-height:1.5}
+.nivel-it{font-size:.62rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-left:6px}
+
+@media(max-width:900px){
+  .sims{grid-template-columns:1fr;gap:14px}
+  .sim{padding:18px}
+  .sim-n{font-size:1.25rem}
+  .sim-tg{top:6px}
+}
+
+/* ===== 29/10/2026: login compacto no celular (80% dos acessos): formulário visível logo de cara ===== */
+@media(max-width:600px){
+  .auth{padding:18px 16px 28px;gap:18px;align-items:start;min-height:auto;grid-template-columns:minmax(0,1fr)}
+  .auth > *{min-width:0} /* a fileira de pílulas rola de lado sem alargar a página */
+  .auth-hero .logo{height:auto;max-width:120px;margin-bottom:12px}
+  .auth-hero .kicker{font-size:.74rem}
+  .auth-hero h1{font-size:2.05rem;margin:10px 0 10px}
+  .auth-hero h1 em{font-size:.62em;margin-top:.15em}
+  .auth-hero .lead{display:none}
+  .chips{margin-top:12px;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px}
+  .chips::-webkit-scrollbar{display:none}
+  .chips li{flex:none;padding:.4em .75em;border-radius:99px;font-size:.74rem;white-space:nowrap}
+  .chips b{font-size:.84rem}
+  .auth-card{padding:22px 18px 18px;padding-top:58px;border-radius:22px}
+  .auth-card input{font-size:16px} /* evita o zoom automático do iPhone ao tocar no campo */
+  .fine{margin-top:12px}
+}
+/* painel e resultado: toques confortáveis e textos que não estouram no celular */
+@media(max-width:600px){
+  .hero-p{padding:24px 0 22px}
+  .hero-p .kicker{font-size:.74rem}
+  .hero-p h1{font-size:1.85rem;margin:8px 0 6px}
+  .hero-p p.sub{font-size:.9rem}
+  .sims{margin-top:16px}
+  .sim{padding:16px;gap:10px}
+  .sim-info li{font-size:.74rem}
+  .sim-acao .btn{width:100%;justify-content:center}
+  .sim-acao small{width:100%;text-align:center}
+  .sim-tg{margin-top:18px;width:100%}
+  .sim-tg button{flex:1;padding:.7em .5em}
+  .faixa{padding:14px 16px}
+  .faixa p{font-size:.86rem}
+}
+
+/* resultado no celular: a nota vem primeiro, depois os números e o nível */
+@media(max-width:600px){
+  .pg-res .hero-grid{gap:14px}
+  .pg-res .hero-grid > div:last-child{order:-1}
+  .pg-res .ring{width:160px;height:160px}
+  .pg-res .ring .ct b{font-size:2.4rem}
+  .pg-res .ring .ct span{font-size:.6rem}
+  .pg-res .ring-cap{margin-top:4px;font-size:.74rem}
+  .pg-res .hero-p h1{font-size:1.6rem}
+  .res-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+  .res-stats div{min-width:0;padding:.6em .7em;border-radius:12px}
+  .res-stats b{font-size:1.2rem}
+  .res-stats span{font-size:.58rem;letter-spacing:.06em}
+}

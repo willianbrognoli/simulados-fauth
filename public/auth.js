@@ -55,6 +55,30 @@ enviar($('#f-entrar'), '/api/login', d => {
   return null;
 });
 
+// esqueci minha senha: o Firebase manda o link para o e-mail do cadastro
+const mostrarForm = id => $$('.form').forEach(f => f.classList.toggle('on', f.id === id));
+$('#bt-esqueci').addEventListener('click', () => {
+  const cpf = $('#f-entrar input[name=cpf]').value;
+  if (cpf) { const i = $('#f-esqueci input[name=cpf]'); i.value = cpf; i.dispatchEvent(new Event('input')); }
+  mostrarForm('f-esqueci');
+});
+$('#bt-voltar').addEventListener('click', () => mostrarForm('f-entrar'));
+$('#f-esqueci').addEventListener('submit', async e => {
+  e.preventDefault();
+  const form = e.target, btn = $('button[type=submit]', form);
+  const cpf = $('input[name=cpf]', form).value;
+  if (!cpfValido(cpf)) return toast('Digite um CPF válido.', 'erro');
+  btn.disabled = true;
+  try {
+    const r = await api('/api/senha/esqueci', { method: 'POST', body: { cpf }, semRedirect: true });
+    toast(r.msg, 'ok');
+    setTimeout(() => mostrarForm('f-entrar'), 2500);
+  } catch (er) {
+    toast(er.message, 'erro');
+  }
+  btn.disabled = false;
+});
+
 enviar($('#f-criar'), '/api/cadastro', d => {
   if ((d.nome || '').trim().split(/\s+/).length < 2) return 'Informe nome e sobrenome.';
   if (!cpfValido(d.cpf)) return 'CPF inválido. Confira os números.';

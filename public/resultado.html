@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Resultado · Simulado INSS</title>
+<title>Resultado · Simulados INSS</title>
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#031636">
 <link rel="icon" href="https://adrianefauth.com.br/wp-content/uploads/2024/06/cropped-Logo-Adriane-Fauth-02-32x32.png">
@@ -19,7 +19,7 @@
   <div class="in">
     <img class="logo" src="https://adrianefauth.com.br/wp-content/uploads/2024/06/Logo-Adriane-Fauth-04.png" alt="Adriane Fauth">
     <span class="sp"></span>
-    <a class="btn btn-ghost btn-sm" href="/painel">← Meu painel</a>
+    <a class="btn btn-ghost btn-sm" href="/painel" id="r-voltar">← Meu painel</a>
   </div>
 </header>
 
@@ -31,10 +31,11 @@
       <p class="sub" id="r-sub"></p>
       <div class="res-stats" id="r-stats"></div>
       <div class="aviso oculto" id="r-aviso"></div>
+      <div class="faixa oculto" id="r-faixa"></div>
     </div>
     <div>
       <div class="ring" id="ring"></div>
-      <p class="ring-cap">Nota líquida = certos − errados (máx. 80)</p>
+      <p class="ring-cap">Nota líquida = certos − errados (máx. <span id="r-max">40</span>)</p>
     </div>
   </div>
 </section>
@@ -69,7 +70,7 @@
   </section>
 </main>
 
-<footer class="rod">© Prof.ª Adriane Fauth · Simulado INSS</footer>
+<footer class="rod">© Prof.ª Adriane Fauth · Simulados INSS</footer>
 
 <script src="/ui.js"></script>
 <script src="/resultado.js"></script>

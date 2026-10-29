@@ -30,6 +30,9 @@ async function carregar() {
     return;
   }
   desvio = Date.now() - new Date(P.agora).getTime();
+  $('#gate-sim').textContent = P.simuladoNome || 'Simulado INSS';
+  { const m = Math.round((P.duracaoSeg || 5400) / 60); $('#gate-dur').textContent = m >= 60 ? `${Math.floor(m / 60)}h${m % 60 ? String(m % 60).padStart(2, '0') : ''}` : `${m} min`; }
+  document.title = `Prova · ${P.simuladoNome || 'Simulados INSS'}`;
   const jaComecou = Object.keys(P.respostas).length > 0 || P.saidas > 0;
   if (jaComecou) {
     $('#gate-tit').innerHTML = 'Sua prova está <em>em andamento.</em>';

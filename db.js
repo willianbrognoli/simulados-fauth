@@ -43,6 +43,16 @@ CREATE TABLE IF NOT EXISTS tentativas (
 CREATE UNIQUE INDEX IF NOT EXISTS tentativas_uma_aberta ON tentativas (aluno_id) WHERE finalizada_em IS NULL;
 CREATE INDEX IF NOT EXISTS tentativas_aluno ON tentativas (aluno_id, iniciada_em DESC);
 CREATE INDEX IF NOT EXISTS tentativas_ranking ON tentativas (nota DESC, duracao_seg) WHERE finalizada_em IS NOT NULL;
+
+-- 29/10/2026: login pelo Firebase (a senha fica no Firebase; senha_hash só para contas antigas)
+ALTER TABLE alunos ADD COLUMN IF NOT EXISTS firebase_uid TEXT;
+ALTER TABLE alunos ALTER COLUMN senha_hash DROP NOT NULL;
+CREATE UNIQUE INDEX IF NOT EXISTS alunos_firebase_uid ON alunos (firebase_uid) WHERE firebase_uid IS NOT NULL;
+CREATE UNIQUE INDEX IF NOT EXISTS alunos_email ON alunos (lower(email)) WHERE firebase_uid IS NOT NULL;
+
+-- 29/10/2026: vários simulados ('inss80' = o simulado antigo de 80 itens, guardado; 's1' e 's2' = os atuais)
+ALTER TABLE tentativas ADD COLUMN IF NOT EXISTS simulado TEXT NOT NULL DEFAULT 'inss80';
+CREATE INDEX IF NOT EXISTS tentativas_aluno_sim ON tentativas (aluno_id, simulado, iniciada_em DESC);
 `;
 
 async function init() {

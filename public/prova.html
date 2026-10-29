@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Prova · Simulado INSS</title>
+<title>Prova · Simulados INSS</title>
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#031636">
 <link rel="icon" href="https://adrianefauth.com.br/wp-content/uploads/2024/06/cropped-Logo-Adriane-Fauth-02-32x32.png">
@@ -21,11 +21,11 @@
   <div class="stars abs" aria-hidden="true"></div>
   <div class="box">
     <img class="logo" src="https://adrianefauth.com.br/wp-content/uploads/2024/06/Logo-Adriane-Fauth-04.png" alt="Adriane Fauth">
-    <span class="kicker"><span class="dot"></span>Simulado INSS · padrão Cebraspe</span>
+    <span class="kicker"><span class="dot"></span><span id="gate-sim">Simulado INSS</span> · padrão Cebraspe</span>
     <h2 id="gate-tit">Respira fundo. <em>A prova vai começar.</em></h2>
     <p id="gate-sub">Ao clicar no botão, a prova abre em tela cheia e os itens aparecem.</p>
     <ul>
-      <li>⏱️ <span>O cronômetro de <b>3 horas</b> já está correndo.</span></li>
+      <li>⏱️ <span>O cronômetro de <b id="gate-dur">1h30</b> já está correndo.</span></li>
       <li>⚠️ <span>Sair da tela cheia, trocar de aba, minimizar, fechar ou recarregar a página conta como saída. <b>Na 3ª, a prova é entregue.</b></span></li>
       <li>✍️ <span>Cada erro anula um acerto. Em dúvida, <b>deixe em branco</b>.</span></li>
       <li>⏳ <span>Cada item mostra um contador de ritmo de <b id="ritmo-gate">2min15s</b>. É só para treinar velocidade: passar dele não muda nada.</span></li>
@@ -37,8 +37,8 @@
 <header class="pbar">
   <div class="in">
     <img class="logo" src="https://adrianefauth.com.br/wp-content/uploads/2024/06/Logo-Adriane-Fauth-04.png" alt="Adriane Fauth">
-    <div class="tempo" id="tempo" aria-live="off"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg><b>03:00:00</b></div>
-    <div class="prog"><small><span id="prog-txt">0 de 80 respondidos</span><span id="prog-pc">0%</span></small><div class="barra" id="prog"><i></i></div></div>
+    <div class="tempo" id="tempo" aria-live="off"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg><b>--:--:--</b></div>
+    <div class="prog"><small><span id="prog-txt">0 respondidos</span><span id="prog-pc">0%</span></small><div class="barra" id="prog"><i></i></div></div>
     <span class="sp"></span>
     <span class="saidas" id="saidas">Saídas: 0/3</span>
     <button class="btn btn-ouro btn-sm" id="bt-entregar">Entregar prova</button>

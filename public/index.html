@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Simulado INSS · Prof.ª Adriane Fauth</title>
+<title>Simulados INSS · Prof.ª Adriane Fauth</title>
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#031636">
 <link rel="icon" href="https://adrianefauth.com.br/wp-content/uploads/2024/06/cropped-Logo-Adriane-Fauth-02-32x32.png">
@@ -21,13 +21,13 @@
   <section class="auth-hero">
     <img class="logo" src="https://adrianefauth.com.br/wp-content/uploads/2024/06/Logo-Adriane-Fauth-04.png" alt="Adriane Fauth">
     <span class="kicker"><span class="dot"></span>Técnico do Seguro Social · padrão Cebraspe</span>
-    <h1>Simulado <span class="ouro">INSS</span><br><em>do jeito que cai na prova.</em></h1>
-    <p class="lead">80 itens inéditos de certo ou errado, cronômetro de 3 horas e correção na hora com gabarito comentado, mapa dos seus pontos fortes e ranking entre os alunos.</p>
+    <h1>Simulados <span class="ouro">INSS</span><br><em>do jeito que cai na prova.</em></h1>
+    <p class="lead">Dois simulados de certo ou errado, cada um com Constitucional e Previdenciário, cronômetro, correção na hora com gabarito comentado, mapa dos seus pontos fortes e ranking entre os alunos.</p>
     <ul class="chips">
-      <li><b>70</b> Previdenciário</li>
-      <li><b>10</b> Constitucional</li>
-      <li><b>3h</b> de prova</li>
-      <li><b>1</b> tentativa a cada 24h</li>
+      <li><b>2</b> simulados</li>
+      <li><b>40</b> itens cada</li>
+      <li><b>1h30</b> de prova</li>
+      <li><b>Os dois</b> no mesmo dia</li>
     </ul>
   </section>
 
@@ -41,7 +41,15 @@
     <form id="f-entrar" class="form on" novalidate>
       <label>CPF<input name="cpf" inputmode="numeric" autocomplete="username" placeholder="000.000.000-00"><span class="dica-campo"></span></label>
       <label>Senha<input name="senha" type="password" autocomplete="current-password" placeholder="Sua senha"></label>
-      <button class="btn btn-ouro w100" type="submit">Entrar no simulado</button>
+      <button class="btn btn-ouro w100" type="submit">Entrar</button>
+      <button class="link-senha" type="button" id="bt-esqueci">Esqueci minha senha</button>
+    </form>
+
+    <form id="f-esqueci" class="form" novalidate>
+      <p class="fine" style="margin-top:0">Digite seu CPF. Vamos enviar um link para o e-mail do seu cadastro para você criar uma nova senha.</p>
+      <label>CPF<input name="cpf" inputmode="numeric" autocomplete="username" placeholder="000.000.000-00"><span class="dica-campo"></span></label>
+      <button class="btn btn-ouro w100" type="submit">Enviar link por e-mail</button>
+      <button class="link-senha" type="button" id="bt-voltar">Voltar para Entrar</button>
     </form>
 
     <form id="f-criar" class="form" novalidate>
@@ -56,7 +64,7 @@
       <button class="btn btn-ouro w100" type="submit">Criar conta e começar</button>
     </form>
 
-    <p class="fine">Seu CPF fica vinculado às suas tentativas. Esqueceu a senha? Fale com a equipe pelo WhatsApp.</p>
+    <p class="fine">Você entra com o CPF e a senha. Ao criar a conta, enviamos um e-mail de confirmação para o endereço informado.</p>
   </section>
 </main>
 

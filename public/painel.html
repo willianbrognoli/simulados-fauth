@@ -25,25 +25,16 @@
 </header>
 
 <section class="hero-p">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="kicker">Simulado INSS · Técnico do Seguro Social</span>
-      <h1 id="titulo">Pronto para a <em>prova de hoje?</em></h1>
-      <p class="sub" id="subtitulo">80 itens de certo ou errado em 3 horas. Cada erro anula um acerto, então em dúvida, deixe em branco.</p>
-      <div class="nivel">
-        <div class="badge-n"><div><small>NÍVEL</small><b id="nv">1</b></div></div>
-        <div class="xp"><small><span id="xp-txt">0 XP</span><span id="xp-prox"></span></small><div class="barra"><i id="xp-bar"></i></div></div>
-      </div>
-      <div class="cta" id="cta"></div>
-    </div>
-    <div>
-      <div class="ring" id="ring"></div>
-      <p class="ring-cap" id="ring-cap">Sua última nota (máx. 80)</p>
-    </div>
+  <div class="wrap">
+    <span class="kicker">Simulados INSS · Técnico do Seguro Social</span>
+    <h1 id="titulo">Seus <em>simulados</em></h1>
+    <p class="sub" id="subtitulo">Constitucional primeiro, Previdenciário depois, como na prova. Cada erro anula um acerto: em dúvida, deixe em branco. Você pode fazer os dois no mesmo dia.</p>
+    <div class="sims" id="sims"></div>
   </div>
 </section>
 
 <main class="wrap">
+  <div class="sim-tg" id="sim-tg" role="tablist" aria-label="Escolha o simulado"></div>
   <div class="kpis">
     <div class="card kpi rv"><b id="k-ult">—</b><span>Última nota líquida</span></div>
     <div class="card kpi rv"><b id="k-mel">—</b><span>Melhor nota</span></div>
@@ -82,7 +73,7 @@
 
   <section class="sec grid2">
     <div class="card rv">
-      <h2>Ranking geral</h2>
+      <h2 id="rank-tit">Ranking</h2>
       <p class="sub">O ranking oficial considera a 1ª tentativa de cada aluno. Empate: vence quem terminou mais rápido.</p>
       <div class="rank-tg"><button class="on" data-modo="primeira">1ª tentativa</button><button data-modo="melhor">Melhor nota</button></div>
       <div class="tabela"><table class="rank" id="rank"><thead><tr><th>#</th><th>Aluno</th><th>Nota</th><th>Certos</th><th>Tempo</th></tr></thead><tbody></tbody></table></div>
@@ -95,19 +86,19 @@
   </section>
 </main>
 
-<footer class="rod">© Prof.ª Adriane Fauth · Simulado INSS · Itens inéditos elaborados com base nas últimas provas do Cebraspe e na legislação atualizada.</footer>
+<footer class="rod">© Prof.ª Adriane Fauth · Simulados INSS · Itens inéditos elaborados com base nas últimas provas do Cebraspe e na legislação atualizada.</footer>
 
 <div class="modal" id="m-regras" role="dialog" aria-modal="true" aria-labelledby="m-regras-t">
   <div class="box">
     <div class="ic-top"><svg viewBox="0 0 100 100"><path d="M50 0 L56 44 L100 50 L56 56 L50 100 L44 56 L0 50 L44 44 Z"/></svg></div>
-    <h3 id="m-regras-t">Antes de começar</h3>
+    <h3 id="m-regras-t">Antes de começar o <span id="rg-nome">simulado</span></h3>
     <p>Leia com atenção. As regras valem como numa prova de verdade.</p>
     <ul class="regras">
-      <li><i>3h</i><span>Você terá <b>3 horas</b>. O cronômetro corre mesmo se fechar a página, e ao zerar a prova é entregue sozinha.</span></li>
+      <li><i>⏱</i><span id="rg-tempo">Você terá <b>1h30</b>. O cronômetro corre mesmo se fechar a página, e ao zerar a prova é entregue sozinha.</span></li>
       <li><i>C/E</i><span>Padrão Cebraspe: <b>cada item errado anula um certo</b>. Item em branco não soma nem desconta.</span></li>
       <li><i>⛶</i><span>A prova roda em <b>tela cheia</b>. Copiar, colar, imprimir e o botão direito ficam bloqueados.</span></li>
       <li><i>3×</i><span>Trocar de aba, minimizar, sair da tela cheia, fechar ou recarregar a página conta como saída. <b>Na 3ª saída a prova é entregue automaticamente.</b></span></li>
-      <li><i>24h</i><span>Você pode fazer <b>1 tentativa a cada 24 horas</b>, contadas a partir do início desta.</span></li>
+      <li><i>24h</i><span>Cada simulado permite <b>1 tentativa a cada 24 horas</b>, contadas a partir do início. O outro simulado continua liberado.</span></li>
       <li><i>🔔</i><span>Silencie notificações e feche outros programas antes de começar.</span></li>
     </ul>
     <label class="check"><input type="checkbox" id="ck-regras"> Li as regras e estou pronto para começar agora.</label>
