@@ -110,6 +110,19 @@ const MSG_FIREBASE = {
   USER_DISABLED: 'Esta conta foi desativada. Fale com a equipe.',
 };
 const SENHA_ERRADA = ['INVALID_LOGIN_CREDENTIALS', 'INVALID_PASSWORD', 'EMAIL_NOT_FOUND'];
+// Conta antiga (antes do Firebase): cria a conta no Firebase com senha aleatória e liga ao aluno.
+// Se o e-mail já existir no Firebase, não dá para saber o uid sem a senha: o vínculo acontece no próximo login.
+async function garantirFirebase(aluno) {
+  if (aluno.firebase_uid) return aluno.firebase_uid;
+  try {
+    const fb = await firebase('signUp', { email: aluno.email, password: crypto.randomBytes(24).toString('base64url'), returnSecureToken: true });
+    await pool.query('UPDATE alunos SET firebase_uid = $2 WHERE id = $1 AND firebase_uid IS NULL', [aluno.id, fb.localId]);
+    return fb.localId;
+  } catch (e) {
+    if (e.codigo !== 'EMAIL_EXISTS') console.log('criar conta no Firebase:', e.codigo || e.message);
+    return null;
+  }
+}
 const enviarVerificacao = idToken =>
   firebase('sendOobCode', { requestType: 'VERIFY_EMAIL', idToken, continueUrl: SITE_URL }).catch(e => console.log('verificação de e-mail:', e.codigo));
 
@@ -241,7 +254,16 @@ app.post('/api/login', limitar(10, 15 * 60e3), h(async (req, res) => {
   if (!a || !senha) return erro(res, 'CPF ou senha incorretos.', 401);
 
   if (!a.firebase_uid) {
-    // conta antiga (antes do Firebase): confere a senha antiga e migra para o Firebase na hora
+    // conta antiga (antes do Firebase). 1º: o e-mail já tem conta no Firebase (ex.: senha redefinida pelo link)?
+    try {
+      const fb = await firebase('signInWithPassword', { email: a.email, password: senha, returnSecureToken: true });
+      await pool.query('UPDATE alunos SET firebase_uid = $2, senha_hash = NULL WHERE id = $1', [a.id, fb.localId]);
+      setSessao(res, a.id);
+      return res.json({ ok: true });
+    } catch (e) {
+      if (!(e instanceof ErroFirebase)) throw e;
+    }
+    // 2º: confere a senha antiga e migra para o Firebase na hora
     if (!a.senha_hash || !(await bcrypt.compare(senha, a.senha_hash))) return erro(res, 'CPF ou senha incorretos.', 401);
     try {
       const fb = await firebase('signUp', { email: a.email, password: senha, returnSecureToken: true });
@@ -271,10 +293,10 @@ app.post('/api/login', limitar(10, 15 * 60e3), h(async (req, res) => {
 app.post('/api/senha/esqueci', limitar(5, 15 * 60e3), h(async (req, res) => {
   const cpf = String((req.body || {}).cpf || '').replace(/\D/g, '');
   if (!cpfValido(cpf)) return erro(res, 'Digite um CPF válido.');
-  const { rows } = await pool.query('SELECT email, firebase_uid FROM alunos WHERE cpf = $1', [cpf]);
+  const { rows } = await pool.query('SELECT id, email, firebase_uid FROM alunos WHERE cpf = $1', [cpf]);
   const generica = { ok: true, msg: 'Se o CPF estiver cadastrado, você vai receber um e-mail com o link para criar uma nova senha.' };
   if (!rows[0]) return res.json(generica);
-  if (!rows[0].firebase_uid) return erro(res, 'Sua conta é anterior à atualização do login. Fale com a equipe pelo WhatsApp para redefinir a senha.');
+  await garantirFirebase(rows[0]); // conta antiga: cria no Firebase antes de mandar o link
   try {
     await firebase('sendOobCode', { requestType: 'PASSWORD_RESET', email: rows[0].email, continueUrl: SITE_URL });
   } catch (e) {
@@ -495,6 +517,28 @@ app.get('/api/admin/alunos.csv', h(async (req, res) => {
   res.setHeader('Content-Type', 'text/csv; charset=utf-8');
   res.setHeader('Content-Disposition', 'attachment; filename="alunos-simulados-inss.csv"');
   res.send('﻿' + csv);
+}));
+
+// ----- equipe: redefinir o login de todos (envia o link de nova senha para cada aluno) -----
+// POST /api/admin/redefinir-senhas?token=ADMIN_TOKEN   (opcional: &cpf=... para uma pessoa só)
+app.post('/api/admin/redefinir-senhas', h(async (req, res) => {
+  const tok = String(req.query.token || '');
+  if (!ADMIN_TOKEN || tok.length !== ADMIN_TOKEN.length || !crypto.timingSafeEqual(Buffer.from(tok), Buffer.from(ADMIN_TOKEN))) return erro(res, 'Não autorizado.', 401);
+  const cpf = String(req.query.cpf || '').replace(/\D/g, '');
+  const { rows } = cpf
+    ? await pool.query('SELECT id, nome, email, firebase_uid FROM alunos WHERE cpf = $1', [cpf])
+    : await pool.query('SELECT id, nome, email, firebase_uid FROM alunos ORDER BY id');
+  const resultado = [];
+  for (const a of rows) {
+    await garantirFirebase(a);
+    try {
+      await firebase('sendOobCode', { requestType: 'PASSWORD_RESET', email: a.email, continueUrl: SITE_URL });
+      resultado.push({ nome: nomeCurto(a.nome), email: mascararEmail(a.email), enviado: true });
+    } catch (e) {
+      resultado.push({ nome: nomeCurto(a.nome), email: mascararEmail(a.email), enviado: false, erro: e.codigo || e.message });
+    }
+  }
+  res.json({ total: rows.length, resultado });
 }));
 
 // ----- páginas -----
