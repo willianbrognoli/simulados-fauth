@@ -26,6 +26,21 @@ const IDS_ATUAIS = SIMULADOS.map(s => s.id);
 // itens do simulado antigo (ids 1-80) continuam resolvíveis para corrigir provas antigas
 const POR_ID = new Map([...QUESTOES_ANTIGAS.map(q => [q.id, q]), ...POR_ID_NOVOS]);
 
+// Pitch de venda no fim do simulado (Black Fauth, foco INSS). Dados da página black.adrianefauth.com.br em 30/10/2026.
+// Depois de `blackAte`, preços e menção à Black somem sozinhos (fica só o convite para o curso).
+const OFERTA = {
+  curso: 'Projeto 80 Pontos INSS',
+  descricao: 'Direito Constitucional e Direito Previdenciário com a Prof.ª Adriane Fauth e a Prof.ª Lilian Novakoski.',
+  url: 'https://black.adrianefauth.com.br/?utm_source=simulados&utm_medium=resultado&utm_campaign=black_inss#cursos',
+  blackAte: '2026-10-31T23:59:59-03:00',
+  de: 'R$ 659', cartao: 'R$ 329,50', parcelas: '12x de R$ 34,08', pix: 'R$ 263,60', desconto: '50% OFF + 20% OFF no Pix',
+};
+function oferta() {
+  const black = Date.now() <= new Date(OFERTA.blackAte).getTime();
+  const { curso, descricao, url } = OFERTA;
+  return black ? { ...OFERTA, black: true } : { curso, descricao, url, black: false };
+}
+
 // retorno ao aluno por faixa de acertos (em % de itens certos)
 function faixa(certos, total) {
   const p = total ? certos / total : 0;
@@ -470,6 +485,7 @@ app.get('/api/tentativas/:id', auth, h(async (req, res) => {
     por_tema_anterior: anterior.rows[0] ? anterior.rows[0].por_tema : null,
     total,
     faixa: faixa(t.certos, total),
+    oferta: oferta(),
     temas: TEMAS,
     revisao: t.ordem.map((id, i) => {
       const q = POR_ID.get(id);
@@ -539,6 +555,20 @@ app.post('/api/admin/redefinir-senhas', h(async (req, res) => {
     }
   }
   res.json({ total: rows.length, resultado });
+}));
+
+// ----- equipe: apagar tentativas (ex.: testes antes de abrir para os alunos) -----
+// POST /api/admin/limpar-tentativas?token=ADMIN_TOKEN&confirmar=APAGAR   (opcional: &cpf=... só de uma pessoa)
+app.post('/api/admin/limpar-tentativas', h(async (req, res) => {
+  const tok = String(req.query.token || '');
+  if (!ADMIN_TOKEN || tok.length !== ADMIN_TOKEN.length || !crypto.timingSafeEqual(Buffer.from(tok), Buffer.from(ADMIN_TOKEN))) return erro(res, 'Não autorizado.', 401);
+  if (req.query.confirmar !== 'APAGAR') return erro(res, 'Confirme com &confirmar=APAGAR.');
+  const cpf = String(req.query.cpf || '').replace(/\D/g, '');
+  const { rows } = cpf
+    ? await pool.query('DELETE FROM tentativas t USING alunos a WHERE t.aluno_id = a.id AND a.cpf = $1 RETURNING t.simulado', [cpf])
+    : await pool.query('DELETE FROM tentativas RETURNING simulado');
+  const porSim = rows.reduce((m, r) => ({ ...m, [r.simulado]: (m[r.simulado] || 0) + 1 }), {});
+  res.json({ apagadas: rows.length, porSimulado: porSim });
 }));
 
 // ----- páginas -----

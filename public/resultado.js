@@ -31,6 +31,7 @@ async function carregar() {
   document.title = `Resultado · ${R.simuladoNome}`;
   $('#r-max').textContent = R.total;
   $('#r-voltar').href = `/painel?s=${encodeURIComponent(R.simulado)}`;
+  montarOferta();
   if (R.faixa) {
     $('#r-faixa').innerHTML = `<div><b>Seu nível: ${esc(R.faixa.nivel)} · ${R.certos} de ${R.total} certos</b><p>${esc(R.faixa.texto)}</p></div>`;
     $('#r-faixa').classList.remove('oculto');
@@ -86,3 +87,44 @@ $('#filtros').addEventListener('click', e => {
 });
 
 carregar();
+
+
+// ---------- pitch de venda (Black Fauth, foco INSS): convite compacto no topo + seção completa no fim ----------
+function montarOferta() {
+  const O = R.oferta;
+  if (!O) return;
+  const seta = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  const mini = $('#r-oferta-mini');
+  mini.href = O.url;
+  mini.innerHTML = `<span><b>Quer chegar nos 80 pontos?</b> Conheça o ${esc(O.curso)}${O.black ? ` · <i>Black ${esc(O.desconto)} até 31/10</i>` : ''}</span>${seta}`;
+  mini.classList.remove('oculto');
+
+  const acertos = `${R.certos} de ${R.total}`;
+  const sec = $('#r-oferta');
+  sec.innerHTML = `
+    <div class="of-card">
+      ${O.black ? `<span class="of-kick">BLACK FAUTH · SÓ ATÉ 31/10</span>` : `<span class="of-kick">PRÓXIMO PASSO</span>`}
+      <h2>Você acertou ${acertos} neste simulado.<br><em>Agora é transformar isso em aprovação.</em></h2>
+      <p class="of-txt">O <b>${esc(O.curso)}</b> traz ${esc(O.descricao.replace(/^Direito/, 'Direito'))} São as mesmas duas matérias que você acabou de treinar aqui.</p>
+      ${O.black ? `
+      <div class="of-preco">
+        <div><small>de <s>${esc(O.de)}</s> por</small><b>${esc(O.cartao)}</b><span>no cartão · ${esc(O.parcelas)}</span></div>
+        <div class="of-pix"><small>ou no Pix</small><b>${esc(O.pix)}</b><span>${esc(O.desconto)}</span></div>
+      </div>
+      <div class="of-cd" id="of-cd" aria-label="Tempo até o fim da Black"><div><b>00</b><span>H</span></div><div><b>00</b><span>MIN</span></div><div><b>00</b><span>SEG</span></div><p>para o fim da Black Fauth</p></div>` : ''}
+      <a class="btn btn-ouro of-cta" href="${esc(O.url)}" target="_blank" rel="noopener">Quero o ${esc(O.curso)} ${seta}</a>
+      <p class="of-fine">Você vai para a página da Black Fauth, com o desconto já aplicado no botão de compra.</p>
+    </div>`;
+  sec.classList.remove('oculto');
+  if (O.black) {
+    const alvo = new Date(O.blackAte).getTime(), b = $$('#of-cd b');
+    const tick = () => {
+      const r = Math.max(0, alvo - Date.now());
+      b[0].textContent = pad(Math.floor(r / 36e5));
+      b[1].textContent = pad(Math.floor(r % 36e5 / 6e4));
+      b[2].textContent = pad(Math.floor(r % 6e4 / 1e3));
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+}

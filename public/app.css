@@ -471,3 +471,45 @@ canvas.confete{position:fixed;inset:0;pointer-events:none;z-index:500}
   .res-stats b{font-size:1.2rem}
   .res-stats span{font-size:.58rem;letter-spacing:.06em}
 }
+
+/* ===== 30/10/2026: pitch de venda no resultado (Black Fauth, Projeto 80 Pontos INSS) ===== */
+.oferta-mini{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;max-width:640px;padding:14px 18px;border-radius:16px;
+  background:linear-gradient(90deg,rgba(229,185,92,.22),rgba(229,185,92,.08));border:1px solid rgba(229,185,92,.55);color:#fff;text-decoration:none;font-size:.9rem;line-height:1.4;transition:transform .2s,background .2s}
+.oferta-mini:hover{transform:translateY(-1px);background:linear-gradient(90deg,rgba(229,185,92,.32),rgba(229,185,92,.12))}
+.oferta-mini b{color:var(--ouro2)}
+.oferta-mini i{font-style:normal;color:#c9d6f2}
+.oferta-mini svg{width:22px;height:22px;flex:none;color:var(--ouro2)}
+.oferta{margin-top:10px}
+.of-card{background:linear-gradient(160deg,#0b1b3d,#031636);color:#fff;border-radius:28px;padding:38px 36px;box-shadow:var(--sh);border:1px solid rgba(229,185,92,.4);text-align:center}
+.of-kick{display:inline-block;font-size:.72rem;font-weight:800;letter-spacing:.14em;color:#031636;background:var(--ouro2);border-radius:99px;padding:.45em 1em}
+.of-card h2{font-size:1.9rem;line-height:1.2;margin:16px 0 10px;color:#fff}
+.of-card h2 em{color:var(--ouro2);font-family:'Literata',serif;font-weight:500}
+.of-txt{color:#c9d6f2;max-width:620px;margin:0 auto 18px;line-height:1.55}
+.of-txt b{color:#fff}
+.of-preco{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:6px 0 16px}
+.of-preco > div{display:flex;flex-direction:column;align-items:center;gap:2px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:14px 22px;min-width:200px}
+.of-preco small{color:#c9d6f2;font-size:.78rem}
+.of-preco s{color:#ff8a8a}
+.of-preco b{font-size:2rem;font-weight:900;color:#fff;line-height:1.1}
+.of-preco span{color:#c9d6f2;font-size:.78rem}
+.of-preco .of-pix{border-color:rgba(52,199,89,.6);background:rgba(52,199,89,.12)}
+.of-preco .of-pix b{color:#5fe08a}
+.of-cd{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.of-cd div{background:rgba(255,255,255,.08);border-radius:12px;padding:.4em .7em;min-width:58px;display:flex;flex-direction:column;align-items:center}
+.of-cd b{font-size:1.4rem;font-weight:900;color:var(--ouro2)}
+.of-cd span{font-size:.6rem;letter-spacing:.12em;color:#c9d6f2}
+.of-cd p{width:100%;margin:2px 0 0;font-size:.78rem;color:#c9d6f2}
+.of-cta{font-size:1.05rem;padding:1em 1.8em;display:inline-flex;align-items:center;gap:10px}
+.of-cta svg{width:20px;height:20px}
+.of-fine{font-size:.74rem;color:#9fb0d3;margin:12px 0 0}
+@media(max-width:600px){
+  .of-card{padding:26px 18px;border-radius:22px}
+  .of-card h2{font-size:1.4rem}
+  .of-preco > div{min-width:0;flex:1 1 140px;padding:12px 10px}
+  .of-preco b{font-size:1.6rem}
+  .of-cta{width:100%;justify-content:center;font-size:1rem}
+  .oferta-mini{font-size:.84rem;padding:12px 14px}
+}
+
+.of-card h2{display:block;text-align:center}
+.of-card h2 em{display:block;margin-top:4px}
